@@ -59,5 +59,41 @@ namespace CSApp.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 苹果标签 的本地化字符串。
+        /// </summary>
+        internal static string APPLE_LBL {
+            get {
+                return ResourceManager.GetString("APPLE_LBL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误 的本地化字符串。
+        /// </summary>
+        internal static string ERROR {
+            get {
+                return ResourceManager.GetString("ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已经打印条码数量{0}，到达本日的打印上限！ 的本地化字符串。
+        /// </summary>
+        internal static string MAX_LIMIT {
+            get {
+                return ResourceManager.GetString("MAX_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 模板文件{0}不存在 的本地化字符串。
+        /// </summary>
+        internal static string NO_TEMPLATE {
+            get {
+                return ResourceManager.GetString("NO_TEMPLATE", resourceCulture);
+            }
+        }
     }
 }

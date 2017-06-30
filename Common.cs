@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CSApp
 {
-    class Common
+    internal static class Common
     {
         /// <summary>
         ///     获取日期是一年中第几个星期
@@ -39,7 +39,7 @@ namespace CSApp
         /// </summary>
         /// <param name="strBase34"></param>
         /// <returns></returns>
-        public static int ConvertBase34ToBase10(string strBase34)
+        private static int ConvertBase34ToBase10(string strBase34)
         {
             int result;
             char[] ch = strBase34.ToUpper().ToCharArray();
@@ -81,8 +81,7 @@ namespace CSApp
         public static string ConvertBase10ToBase34(int num)
         {
             string result;
-            int i;
-            i = num % 34;
+            int i = num % 34;
             switch (i)
             {
                 case 10: result = "A"; break;

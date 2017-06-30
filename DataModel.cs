@@ -51,7 +51,7 @@ namespace CSApp
         public string Contents { get; set; }
         [MaxLength(5)]
         public string QCSymbol { get; set; }
-        public virtual Printed Printed { get; set; }
+        public Printed Printed { get; set; }
     }
 
     public class DataModelContext : DbContext

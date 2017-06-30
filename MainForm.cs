@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using CSApp.Properties;
 using Tkx.Lppa;
 
 namespace CSApp
@@ -43,7 +44,7 @@ namespace CSApp
             UpdatePrinterList();
 
             // 加载制品信息
-            TreeNode node = new TreeNode {Text = "苹果标签"};
+            TreeNode node = new TreeNode {Text = Resources.APPLE_LBL};
             treeView1.Nodes.Add(node);
             foreach (var product in Business.context.Product.OrderBy(c => c.Category))
             {
@@ -161,52 +162,50 @@ namespace CSApp
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if (ActiveDoc != null)
+            if (ActiveDoc == null) return;
+            var product = (Product)treeView1.SelectedNode.Tag;
+            string dateFlag = (System.DateTime.Now.Year % 10).ToString()
+                              + Common.GetWeekOfYear(System.DateTime.Now).ToString("00")
+                              + (Convert.ToInt32(System.DateTime.Now.DayOfWeek) + 1).ToString();
+            var printed = Business.GetPrinted(product.ID, dateFlag);
+
+            int pqty = int.Parse(txtPQty.Text);
+            int page = int.Parse(txtRows.Text) * ActiveDoc.Format.ColumnCount;
+            while (pqty > 0)
             {
-                var product = (Product)treeView1.SelectedNode.Tag;
-                string dateFlag = (System.DateTime.Now.Year % 10).ToString()
-                    + Common.GetWeekOfYear(System.DateTime.Now).ToString("00")
-                    + (Convert.ToInt32(System.DateTime.Now.DayOfWeek) + 1).ToString();
-                var printed = Business.GetPrinted(product.ID, dateFlag);
-
-                int pqty = int.Parse(txtPQty.Text);
-                int page = int.Parse(txtRows.Text) * ActiveDoc.Format.ColumnCount;
-                while (pqty > 0)
+                if (!Business.SetPrinted(printed, (int)Math.Pow(34, 4) - 1, page))
                 {
-                    if (!Business.SetPrinted(printed, (int)Math.Pow(34, 4) - 1, page))
-                    {
-                        MessageBox.Show($"已经打印条码数量{printed.TotalNum}，到达本日的打印上限！");
-                        return;
-                    }
-                    ActiveDoc.HorzPrintOffset = int.Parse(txtHPos.Text);
-                    ActiveDoc.VertPrintOffset = int.Parse(txtVPos.Text);
-                    ActiveDoc.FullClippingMode = true;
-                    
-                    for (int i = printed.TotalNum - page; i < printed.TotalNum; ++i)
-                    {
-                        string barcode = product.PlantCode + dateFlag
-                            + Common.ConvertDecimalToBase34(i) + product.Engineer + product.Revision;
-                        barcode += Common.ConvertBase10ToBase34(Common.GetCheckSum(barcode)) + product.Configure;
-
-                        ActiveDoc.Variables["var0"].Value = barcode;
-                        ActiveDoc.Variables["var1"].Value = barcode.Substring(0, 11);
-                        ActiveDoc.Variables["var2"].Value = barcode.Substring(11);
-                        UpdateLabelPreview();
-                        Thread.Sleep(500);
-
-                        Business.context.Barcode.Add(new Barcode
-                        {
-                            PrintedID = printed.ID,
-                            Contents = barcode,
-                            QCSymbol = "B",
-                        });
-                        ActiveDoc.PrintLabel(1);
-                    }
-                    Business.context.SaveChanges();
-                    ActiveDoc.FormFeed();
-                    //ActiveDoc.PrintDocument(int.Parse(txtPQty.Text));
-                    --pqty; 
+                    MessageBox.Show(string.Format(Resources.MAX_LIMIT, printed.TotalNum), Resources.ERROR);
+                    return;
                 }
+                ActiveDoc.HorzPrintOffset = int.Parse(txtHPos.Text);
+                ActiveDoc.VertPrintOffset = int.Parse(txtVPos.Text);
+                ActiveDoc.FullClippingMode = true;
+                    
+                for (int i = printed.TotalNum - page; i < printed.TotalNum; ++i)
+                {
+                    string barcode = product.PlantCode + dateFlag
+                                     + Common.ConvertDecimalToBase34(i) + product.Engineer + product.Revision;
+                    barcode += Common.ConvertBase10ToBase34(Common.GetCheckSum(barcode)) + product.Configure;
+
+                    ActiveDoc.Variables["var0"].Value = barcode;
+                    ActiveDoc.Variables["var1"].Value = barcode.Substring(0, 11);
+                    ActiveDoc.Variables["var2"].Value = barcode.Substring(11);
+                    UpdateLabelPreview();
+                    Thread.Sleep(500);
+
+                    Business.context.Barcode.Add(new Barcode
+                    {
+                        PrintedID = printed.ID,
+                        Contents = barcode,
+                        QCSymbol = "B",
+                    });
+                    ActiveDoc.PrintLabel(1);
+                }
+                Business.context.SaveChanges();
+                ActiveDoc.FormFeed();
+                //ActiveDoc.PrintDocument(int.Parse(txtPQty.Text));
+                --pqty; 
             }
         }
 
@@ -214,7 +213,7 @@ namespace CSApp
         {
             try
             {
-                NetApp.Dialogs[DialogType.PrinterSetup].Show((int)this.Handle);
+                NetApp.Dialogs[DialogType.PrinterSetup].Show((int)Handle);
             }
             catch (COMException)
             {
@@ -239,7 +238,7 @@ namespace CSApp
 
                 string label = AppDomain.CurrentDomain.BaseDirectory + product.LabelFile;
                 if (!File.Exists(label))
-                    MessageBox.Show($"模板文件{product.LabelFile}不存在", "错误");
+                    MessageBox.Show(string.Format(Resources.NO_TEMPLATE, product.LabelFile), Resources.ERROR);
                 else
                     lstLabels.Items.Add(product.LabelFile);
                 
