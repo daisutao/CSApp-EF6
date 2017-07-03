@@ -13,17 +13,17 @@ using Tkx.Lppa;
 
 namespace CSApp
 {
-    public partial class frmSample : Form
+    public partial class Sample : Form
     {
         private Tkx.Lppa.Application NetApp = null;
         private Tkx.Lppa.Document ActiveDoc = null;
 
-        public frmSample()
+        public Sample()
         {
             InitializeComponent();
         }
 
-        private void frmSample_Load(object sender, EventArgs e)
+        private void Sample_Load(object sender, EventArgs e)
         {
             //context = new DataModelContext();
             // 通过代码初始化数据库 -- 方法1
