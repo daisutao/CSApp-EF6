@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace CSApp
 {
-    internal static class Common
+    public static class Common
     {
         /// <summary>
         ///     获取日期是一年中第几个星期
@@ -120,14 +117,14 @@ namespace CSApp
         /// <returns></returns>
         public static int GetCheckSum(string str)
         {
-            int i;
-            int oddSum = 0;
-            int evenSum = 0;
-            for (i = 1; i <= str.Length; i++)
+            int oddSum = 0, evenSum = 0;
+            for (int i = 1; i <= str.Length; i++)
+            {
                 if (i % 2 == 1)
                     evenSum += ConvertBase34ToBase10(str.Substring(i - 1, 1));
                 else
                     oddSum += ConvertBase34ToBase10(str.Substring(i - 1, 1));
+            }
             return 34 - (oddSum * 3 + evenSum) % 34;
         }
     }

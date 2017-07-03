@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using CSApp.Properties;
 using Tkx.Lppa;
@@ -192,7 +191,6 @@ namespace CSApp
                     ActiveDoc.Variables["var1"].Value = barcode.Substring(0, 11);
                     ActiveDoc.Variables["var2"].Value = barcode.Substring(11);
                     UpdateLabelPreview();
-                    Thread.Sleep(500);
 
                     Business.context.Barcode.Add(new Barcode
                     {
@@ -200,7 +198,7 @@ namespace CSApp
                         Contents = barcode,
                         QCSymbol = "B",
                     });
-                    ActiveDoc.PrintLabel(1);
+                    ActiveDoc.PrintLabel(1, 1, 1, 1, 0, string.Empty);
                 }
                 Business.context.SaveChanges();
                 ActiveDoc.FormFeed();

@@ -51,7 +51,7 @@ namespace CSApp
         public string Contents { get; set; }
         [MaxLength(5)]
         public string QCSymbol { get; set; }
-        public Printed Printed { get; set; }
+        public virtual Printed Printed { get; set; }
     }
 
     public class DataModelContext : DbContext
@@ -81,7 +81,8 @@ namespace CSApp
         }
     }
 
-    public class DataModelInitializer : CreateDatabaseIfNotExists<DataModelContext> // DropCreateDatabaseIfModelChanges<DataModelContext>
+    public class DataModelInitializer : CreateDatabaseIfNotExists<DataModelContext>
+    //public class DataModelInitializer : DropCreateDatabaseIfModelChanges<DataModelContext>
     {
         protected override void Seed(DataModelContext context)
         {
@@ -99,7 +100,7 @@ namespace CSApp
         }
     }
 
-    public class Business
+    public static class Business
     {
         private static DataModelContext _dbContext;
         public static DataModelContext context
