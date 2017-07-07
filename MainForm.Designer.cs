@@ -1,6 +1,6 @@
 namespace CSApp
 {
-    partial class Sample
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -298,10 +298,10 @@ namespace CSApp
             this.Controls.Add(this.lblLabelFolder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MinimumSize = new System.Drawing.Size(500, 372);
-            this.Name = "Sample";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CodeSoft ¥Ú”°≤‚ ‘≥Ã–Ú";
-            this.Load += new System.EventHandler(this.Sample_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.grpVariables.ResumeLayout(false);
             this.grpVariables.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).EndInit();

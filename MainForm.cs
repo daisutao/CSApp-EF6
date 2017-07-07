@@ -13,17 +13,17 @@ using Tkx.Lppa;
 
 namespace CSApp
 {
-    public partial class Sample : Form
+    public partial class MainForm : Form
     {
         private Tkx.Lppa.Application NetApp = null;
         private Tkx.Lppa.Document ActiveDoc = null;
 
-        public Sample()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        private void Sample_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             //context = new DataModelContext();
             // 通过代码初始化数据库 -- 方法1
@@ -45,12 +45,13 @@ namespace CSApp
             // 加载制品信息
             TreeNode node = new TreeNode {Text = Resources.APPLE_LBL};
             treeView1.Nodes.Add(node);
-            foreach (var product in Business.context.Product.OrderBy(c => c.Category))
+            foreach (var product in Business.Context.Product.OrderBy(c => c.Category))
             {
-                TreeNode node1 = new TreeNode();
-                node1.Text = product.Category;
-                node1.Tag = product;
-                node.Nodes.Add(node1); //node下的子节点
+                node.Nodes.Add(new TreeNode
+                {
+                    Text = product.Category,
+                    Tag = product
+                }); //node下的子节点
             }
             if (node.Nodes.Count > 0)
                 treeView1.SelectedNode = node.Nodes[0];
@@ -71,8 +72,8 @@ namespace CSApp
             if(NetApp != null)
                 NetApp.Quit();
 
-            if (Business.context != null)
-                Business.context.Dispose();
+            if (Business.Context != null)
+                Business.Context.Dispose();
 
             if (disposing && (components != null))
             {
@@ -166,7 +167,7 @@ namespace CSApp
             string dateFlag = (System.DateTime.Now.Year % 10).ToString()
                               + Common.GetWeekOfYear(System.DateTime.Now).ToString("00")
                               + (Convert.ToInt32(System.DateTime.Now.DayOfWeek) + 1).ToString();
-            var printed = Business.GetPrinted(product.ID, dateFlag);
+            var printed = Business.GetPrinted(product.Id, dateFlag);
 
             int pqty = int.Parse(txtPQty.Text);
             int page = int.Parse(txtRows.Text) * ActiveDoc.Format.ColumnCount;
@@ -192,16 +193,16 @@ namespace CSApp
                     ActiveDoc.Variables["var2"].Value = barcode.Substring(11);
                     UpdateLabelPreview();
 
-                    Business.context.Barcode.Add(new Barcode
+                    Business.Context.Barcode.Add(new Barcode
                     {
-                        PrintedID = printed.ID,
+                        PrintedId = printed.Id,
                         Contents = barcode,
-                        QCSymbol = "B",
+                        QcSymbol = "B",
                     });
                     ActiveDoc.PrintLabel(1, 1, 1, 1, 0, string.Empty);
                 }
-                Business.context.SaveChanges();
-                ActiveDoc.FormFeed();
+                Business.Context.SaveChanges();
+                //ActiveDoc.FormFeed();
                 //ActiveDoc.PrintDocument(int.Parse(txtPQty.Text));
                 --pqty; 
             }
@@ -223,6 +224,7 @@ namespace CSApp
             if (ActiveDoc != null)
             {
                 ActiveDoc.Printer.SwitchTo(cbbPrinter.Text);
+                //ActiveDoc.Printer.HeadTemperature = 20; //SetParameter(PrinterSettings.HeadTemperature, new int?(20));
             }
         }
 
@@ -258,7 +260,7 @@ namespace CSApp
             if (int.TryParse(txtHPos.Text, out value) && value != product.HorzOffset)
             {
                 product.HorzOffset = value;
-                Business.context.SaveChanges();
+                Business.Context.SaveChanges();
             }
         }
 
@@ -269,7 +271,7 @@ namespace CSApp
             if (int.TryParse(txtVPos.Text, out value) && value != product.VertOffset)
             {
                 product.VertOffset = value;
-                Business.context.SaveChanges();
+                Business.Context.SaveChanges();
             }
         }
 
@@ -280,7 +282,7 @@ namespace CSApp
             if (int.TryParse(txtRows.Text, out value) && value != product.PageLinage)
             {
                 product.PageLinage = value;
-                Business.context.SaveChanges();
+                Business.Context.SaveChanges();
             }
         }
     }

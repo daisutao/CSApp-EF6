@@ -11,9 +11,9 @@ using System.Threading;
 
 namespace CSApp
 {
-    public class Product
+    public sealed class Product
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         [MaxLength(15)]
         public string Category { get; set; }
         [MaxLength(5)]
@@ -30,28 +30,28 @@ namespace CSApp
         public int PageLinage { get; set; }
     }
 
-    public class Printed
+    public sealed class Printed
     {
-        public int ID { get; set; }
-        public int ProductID { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
         // 根据样式，保存日、周等时间信息
         [MaxLength(10)]
         public string DateFlag { get; set; }
         [ConcurrencyCheck]
         public int TotalNum { get; set; }
-        public virtual Product Product { get; set; }
+        public Product Product { get; set; }
         //public virtual ICollection<Barcode> Barcodes { get; set; }
     }
 
-    public class Barcode
+    public sealed class Barcode
     {
-        public int ID { get; set; }
-        public int PrintedID { get; set; }
+        public int Id { get; set; }
+        public int PrintedId { get; set; }
         [MaxLength(25)]
         public string Contents { get; set; }
         [MaxLength(5)]
-        public string QCSymbol { get; set; }
-        public virtual Printed Printed { get; set; }
+        public string QcSymbol { get; set; }
+        public Printed Printed { get; set; }
     }
 
     public class DataModelContext : DbContext
@@ -69,7 +69,7 @@ namespace CSApp
             modelBuilder.Entity<Product>().Property(t => t.Category).HasColumnAnnotation(
                 "Index", new IndexAnnotation(new IndexAttribute("IX_Category") { IsUnique = true }));
             // 创建索引--Printed
-            modelBuilder.Entity<Printed>().Property(t => t.ProductID).HasColumnAnnotation(
+            modelBuilder.Entity<Printed>().Property(t => t.ProductId).HasColumnAnnotation(
                 "Index", new IndexAnnotation(new IndexAttribute("IX_ProductDatetime", 1) { IsUnique = true }));
             modelBuilder.Entity<Printed>().Property(t => t.DateFlag).HasColumnAnnotation(
                 "Index", new IndexAnnotation(new IndexAttribute("IX_ProductDatetime", 2) { IsUnique = true }));
@@ -81,19 +81,19 @@ namespace CSApp
         }
     }
 
-    public class DataModelInitializer : CreateDatabaseIfNotExists<DataModelContext>
-    //public class DataModelInitializer : DropCreateDatabaseIfModelChanges<DataModelContext>
+    //public class DataModelInitializer : CreateDatabaseIfNotExists<DataModelContext>
+    public class DataModelInitializer : DropCreateDatabaseIfModelChanges<DataModelContext>
     {
         protected override void Seed(DataModelContext context)
         {
             var proudct = new List<Product>
             {
-                new Product { Category = "PRC6875-55L1", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+L", LabelFile = "PRC6905-70L.lab", },
-                new Product { Category = "PRC6875-55L2", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+M", LabelFile = "PRC6905-70L.lab", },
-                new Product { Category = "PRC6905-70L1", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+L", LabelFile = "PRC6905-70L.lab", },
-                new Product { Category = "PRC6905-70L2", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+M", LabelFile = "PRC6905-70L.lab", },
-                new Product { Category = "PRC6968-56C1", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+L", LabelFile = "PRC6905-70L.lab", },
-                new Product { Category = "PRC6968-56C2", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+M", LabelFile = "PRC6905-70L.lab", },   
+                new Product { Category = "PRC6875-55L1", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+L", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6875-55L2", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+M", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6905-70L1", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+L", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6905-70L2", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+M", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6968-56C1", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+L", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6968-56C2", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+M", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
             };
             context.Product.AddRange(proudct);
             context.SaveChanges();//可以分次提交，也可以最后一次性提交给数据库
@@ -103,7 +103,7 @@ namespace CSApp
     public static class Business
     {
         private static DataModelContext _dbContext;
-        public static DataModelContext context
+        public static DataModelContext Context
         {
             get
             {
@@ -114,15 +114,14 @@ namespace CSApp
                 return _dbContext;
             }
         }
-        public static Printed GetPrinted(int ID, string dateFlag)
+        public static Printed GetPrinted(int id, string dateFlag)
         {
-            var printed = context.Printed
-                .Where(p => p.ProductID == ID && p.DateFlag == dateFlag).FirstOrDefault();
+            var printed = Context.Printed.FirstOrDefault(p => p.ProductId == id && p.DateFlag == dateFlag);
             if (printed == null)
             {
-                printed = new Printed { ProductID = ID, DateFlag = dateFlag, TotalNum = 0 };
-                context.Printed.Add(printed);
-                context.SaveChanges();
+                printed = new Printed { ProductId = id, DateFlag = dateFlag, TotalNum = 0 };
+                Context.Printed.Add(printed);
+                Context.SaveChanges();
             }
             return printed;
         }
@@ -136,7 +135,7 @@ namespace CSApp
             try
             {
                 printed.TotalNum += add;
-                context.SaveChanges();
+                Context.SaveChanges();
                 return true;
             }
             catch (Exception)
