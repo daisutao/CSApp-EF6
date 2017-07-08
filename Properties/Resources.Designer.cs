@@ -61,7 +61,7 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
-        ///   查找类似 苹果标签 的本地化字符串。
+        ///   查找类似 MFLEX 的本地化字符串。
         /// </summary>
         internal static string APPLE_LBL {
             get {

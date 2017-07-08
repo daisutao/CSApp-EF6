@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -45,7 +46,8 @@ namespace CSApp
             // 加载制品信息
             TreeNode node = new TreeNode {Text = Resources.APPLE_LBL};
             treeView1.Nodes.Add(node);
-            foreach (var product in Business.Context.Product.OrderBy(c => c.Category))
+            string device = ConfigurationManager.AppSettings["device"];
+            foreach (var product in Business.Context.Product.Where(c => c.DeviceNo == device).OrderBy(c => c.Category))
             {
                 node.Nodes.Add(new TreeNode
                 {
@@ -199,12 +201,11 @@ namespace CSApp
                         Contents = barcode,
                         QcSymbol = "B",
                     });
-                    ActiveDoc.PrintLabel(1, 1, 1, 1, 0, string.Empty);
+                    ActiveDoc.PrintLabel(1);
                 }
                 Business.Context.SaveChanges();
-                //ActiveDoc.FormFeed();
-                //ActiveDoc.PrintDocument(int.Parse(txtPQty.Text));
-                --pqty; 
+                ActiveDoc.FormFeed();
+                --pqty;
             }
         }
 
@@ -247,6 +248,10 @@ namespace CSApp
                 else
                     pbLabelPreview.Image = null;
 
+                txtDeviceNo.Text = product.DeviceNo;
+                txtEngineer.Text = product.Engineer;
+                txtRevision.Text = product.Revision;
+                txtConfigure.Text = product.Configure;
                 txtHPos.Text = product.HorzOffset.ToString();
                 txtVPos.Text = product.VertOffset.ToString();
                 txtRows.Text = product.PageLinage.ToString();
@@ -284,6 +289,25 @@ namespace CSApp
                 product.PageLinage = value;
                 Business.Context.SaveChanges();
             }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            txtEngineer.Enabled = true;
+            txtRevision.Enabled = true;
+            txtConfigure.Enabled = true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var product = (Product)treeView1.SelectedNode.Tag;
+            product.Engineer = txtEngineer.Text.Trim();
+            product.Revision = txtRevision.Text.Trim();
+            product.Configure = txtConfigure.Text.Trim();
+            Business.Context.SaveChanges();
+            txtEngineer.Enabled = false;
+            txtRevision.Enabled = false;
+            txtConfigure.Enabled = false;
         }
     }
 }

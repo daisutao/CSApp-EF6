@@ -21,24 +21,34 @@ namespace CSApp
             this.grpVariables = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnPrinterSettings = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPrinter = new System.Windows.Forms.Label();
             this.cbbPrinter = new System.Windows.Forms.ComboBox();
             this.pbLabelPreview = new System.Windows.Forms.PictureBox();
             this.lstLabels = new System.Windows.Forms.ListBox();
             this.btnUpdateVar = new System.Windows.Forms.Button();
             this.lblVarValue = new System.Windows.Forms.TextBox();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblPQty = new System.Windows.Forms.Label();
             this.grpSettings = new System.Windows.Forms.GroupBox();
+            this.txtConfigure = new System.Windows.Forms.TextBox();
+            this.lblConfigure = new System.Windows.Forms.Label();
+            this.txtRevision = new System.Windows.Forms.TextBox();
+            this.lblRevision = new System.Windows.Forms.Label();
+            this.txtEngineer = new System.Windows.Forms.TextBox();
+            this.lblEngineer = new System.Windows.Forms.Label();
             this.txtRows = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblRows = new System.Windows.Forms.Label();
             this.txtVPos = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblVPos = new System.Windows.Forms.Label();
             this.txtHPos = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblHPos = new System.Windows.Forms.Label();
             this.txtPQty = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.txtDeviceNo = new System.Windows.Forms.TextBox();
+            this.lblDeviceNo = new System.Windows.Forms.Label();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.grpVariables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).BeginInit();
             this.grpSettings.SuspendLayout();
@@ -68,7 +78,7 @@ namespace CSApp
             // 
             this.grpVariables.Controls.Add(this.button2);
             this.grpVariables.Controls.Add(this.btnPrinterSettings);
-            this.grpVariables.Controls.Add(this.label1);
+            this.grpVariables.Controls.Add(this.lblPrinter);
             this.grpVariables.Controls.Add(this.cbbPrinter);
             this.grpVariables.Controls.Add(this.pbLabelPreview);
             this.grpVariables.Controls.Add(this.lstLabels);
@@ -106,14 +116,14 @@ namespace CSApp
             this.btnPrinterSettings.Text = "设置";
             this.btnPrinterSettings.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblPrinter
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 225);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "使用打印机：";
+            this.lblPrinter.AutoSize = true;
+            this.lblPrinter.Location = new System.Drawing.Point(6, 225);
+            this.lblPrinter.Name = "lblPrinter";
+            this.lblPrinter.Size = new System.Drawing.Size(77, 12);
+            this.lblPrinter.TabIndex = 17;
+            this.lblPrinter.Text = "使用打印机：";
             // 
             // cbbPrinter
             // 
@@ -178,26 +188,36 @@ namespace CSApp
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // label2
+            // lblPQty
             // 
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(276, 126);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "打印页数：";
+            this.lblPQty.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblPQty.Location = new System.Drawing.Point(276, 126);
+            this.lblPQty.Name = "lblPQty";
+            this.lblPQty.Size = new System.Drawing.Size(65, 15);
+            this.lblPQty.TabIndex = 7;
+            this.lblPQty.Text = "打印页数：";
             // 
             // grpSettings
             // 
+            this.grpSettings.Controls.Add(this.btnSave);
+            this.grpSettings.Controls.Add(this.btnEdit);
+            this.grpSettings.Controls.Add(this.txtDeviceNo);
+            this.grpSettings.Controls.Add(this.lblDeviceNo);
+            this.grpSettings.Controls.Add(this.txtConfigure);
+            this.grpSettings.Controls.Add(this.lblConfigure);
+            this.grpSettings.Controls.Add(this.txtRevision);
+            this.grpSettings.Controls.Add(this.lblRevision);
+            this.grpSettings.Controls.Add(this.txtEngineer);
+            this.grpSettings.Controls.Add(this.lblEngineer);
             this.grpSettings.Controls.Add(this.txtRows);
-            this.grpSettings.Controls.Add(this.label5);
+            this.grpSettings.Controls.Add(this.lblRows);
             this.grpSettings.Controls.Add(this.txtVPos);
-            this.grpSettings.Controls.Add(this.label4);
+            this.grpSettings.Controls.Add(this.lblVPos);
             this.grpSettings.Controls.Add(this.txtHPos);
-            this.grpSettings.Controls.Add(this.label3);
+            this.grpSettings.Controls.Add(this.lblHPos);
             this.grpSettings.Controls.Add(this.btnPrint);
             this.grpSettings.Controls.Add(this.txtPQty);
-            this.grpSettings.Controls.Add(this.label2);
+            this.grpSettings.Controls.Add(this.lblPQty);
             this.grpSettings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpSettings.Location = new System.Drawing.Point(221, 268);
             this.grpSettings.Name = "grpSettings";
@@ -205,6 +225,60 @@ namespace CSApp
             this.grpSettings.TabIndex = 17;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "打印设置";
+            // 
+            // txtConfigure
+            // 
+            this.txtConfigure.Enabled = false;
+            this.txtConfigure.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtConfigure.Location = new System.Drawing.Point(137, 123);
+            this.txtConfigure.Name = "txtConfigure";
+            this.txtConfigure.Size = new System.Drawing.Size(52, 21);
+            this.txtConfigure.TabIndex = 26;
+            // 
+            // lblConfigure
+            // 
+            this.lblConfigure.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblConfigure.Location = new System.Drawing.Point(72, 126);
+            this.lblConfigure.Name = "lblConfigure";
+            this.lblConfigure.Size = new System.Drawing.Size(65, 15);
+            this.lblConfigure.TabIndex = 25;
+            this.lblConfigure.Text = "末尾码：";
+            // 
+            // txtRevision
+            // 
+            this.txtRevision.Enabled = false;
+            this.txtRevision.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtRevision.Location = new System.Drawing.Point(137, 96);
+            this.txtRevision.Name = "txtRevision";
+            this.txtRevision.Size = new System.Drawing.Size(52, 21);
+            this.txtRevision.TabIndex = 24;
+            // 
+            // lblRevision
+            // 
+            this.lblRevision.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblRevision.Location = new System.Drawing.Point(72, 99);
+            this.lblRevision.Name = "lblRevision";
+            this.lblRevision.Size = new System.Drawing.Size(65, 15);
+            this.lblRevision.TabIndex = 23;
+            this.lblRevision.Text = "版本号：";
+            // 
+            // txtEngineer
+            // 
+            this.txtEngineer.Enabled = false;
+            this.txtEngineer.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtEngineer.Location = new System.Drawing.Point(137, 69);
+            this.txtEngineer.Name = "txtEngineer";
+            this.txtEngineer.Size = new System.Drawing.Size(52, 21);
+            this.txtEngineer.TabIndex = 22;
+            // 
+            // lblEngineer
+            // 
+            this.lblEngineer.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblEngineer.Location = new System.Drawing.Point(72, 72);
+            this.lblEngineer.Name = "lblEngineer";
+            this.lblEngineer.Size = new System.Drawing.Size(65, 15);
+            this.lblEngineer.TabIndex = 21;
+            this.lblEngineer.Text = "机种码：";
             // 
             // txtRows
             // 
@@ -215,14 +289,14 @@ namespace CSApp
             this.txtRows.TabIndex = 20;
             this.txtRows.TextChanged += new System.EventHandler(this.txtRows_TextChanged);
             // 
-            // label5
+            // lblRows
             // 
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(276, 99);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 15);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "每页行数：";
+            this.lblRows.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblRows.Location = new System.Drawing.Point(276, 99);
+            this.lblRows.Name = "lblRows";
+            this.lblRows.Size = new System.Drawing.Size(65, 15);
+            this.lblRows.TabIndex = 19;
+            this.lblRows.Text = "每页行数：";
             // 
             // txtVPos
             // 
@@ -233,14 +307,14 @@ namespace CSApp
             this.txtVPos.TabIndex = 18;
             this.txtVPos.TextChanged += new System.EventHandler(this.txtVPos_TextChanged);
             // 
-            // label4
+            // lblVPos
             // 
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(276, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 15);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "垂直偏移：";
+            this.lblVPos.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblVPos.Location = new System.Drawing.Point(276, 50);
+            this.lblVPos.Name = "lblVPos";
+            this.lblVPos.Size = new System.Drawing.Size(65, 15);
+            this.lblVPos.TabIndex = 17;
+            this.lblVPos.Text = "垂直偏移：";
             // 
             // txtHPos
             // 
@@ -251,14 +325,14 @@ namespace CSApp
             this.txtHPos.TabIndex = 16;
             this.txtHPos.TextChanged += new System.EventHandler(this.txtHPos_TextChanged);
             // 
-            // label3
+            // lblHPos
             // 
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(276, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 15);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "水平偏移：";
+            this.lblHPos.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblHPos.Location = new System.Drawing.Point(276, 23);
+            this.lblHPos.Name = "lblHPos";
+            this.lblHPos.Size = new System.Drawing.Size(65, 15);
+            this.lblHPos.TabIndex = 15;
+            this.lblHPos.Text = "水平偏移：";
             // 
             // txtPQty
             // 
@@ -287,7 +361,49 @@ namespace CSApp
             this.treeView1.TabIndex = 19;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
-            // frmSample
+            // txtDeviceNo
+            // 
+            this.txtDeviceNo.Enabled = false;
+            this.txtDeviceNo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtDeviceNo.Location = new System.Drawing.Point(137, 20);
+            this.txtDeviceNo.Name = "txtDeviceNo";
+            this.txtDeviceNo.Size = new System.Drawing.Size(52, 21);
+            this.txtDeviceNo.TabIndex = 28;
+            // 
+            // lblDeviceNo
+            // 
+            this.lblDeviceNo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDeviceNo.Location = new System.Drawing.Point(72, 23);
+            this.lblDeviceNo.Name = "lblDeviceNo";
+            this.lblDeviceNo.Size = new System.Drawing.Size(65, 15);
+            this.lblDeviceNo.TabIndex = 27;
+            this.lblDeviceNo.Text = "设备号：";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnEdit.Location = new System.Drawing.Point(74, 150);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(57, 22);
+            this.btnEdit.TabIndex = 29;
+            this.btnEdit.Text = "修改";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSave.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSave.Location = new System.Drawing.Point(132, 150);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(57, 22);
+            this.btnSave.TabIndex = 30;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -320,23 +436,33 @@ namespace CSApp
         private System.Windows.Forms.TextBox lblVarValue;
         private System.Windows.Forms.Button btnUpdateVar;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblPQty;
         private System.Windows.Forms.GroupBox grpSettings;
         private System.Windows.Forms.TextBox txtPQty;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblHPos;
         private System.Windows.Forms.TextBox txtVPos;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblVPos;
         private System.Windows.Forms.TextBox txtHPos;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblRows;
         private System.Windows.Forms.ListBox lstLabels;
         private System.Windows.Forms.PictureBox pbLabelPreview;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnPrinterSettings;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPrinter;
         private System.Windows.Forms.ComboBox cbbPrinter;
         private System.Windows.Forms.TextBox txtRows;
+        private System.Windows.Forms.TextBox txtConfigure;
+        private System.Windows.Forms.Label lblConfigure;
+        private System.Windows.Forms.TextBox txtRevision;
+        private System.Windows.Forms.Label lblRevision;
+        private System.Windows.Forms.TextBox txtEngineer;
+        private System.Windows.Forms.Label lblEngineer;
+        private System.Windows.Forms.TextBox txtDeviceNo;
+        private System.Windows.Forms.Label lblDeviceNo;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 

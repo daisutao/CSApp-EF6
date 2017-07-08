@@ -14,6 +14,8 @@ namespace CSApp
     public sealed class Product
     {
         public int Id { get; set; }
+        [MaxLength(5)]
+        public string DeviceNo { get; set; }
         [MaxLength(15)]
         public string Category { get; set; }
         [MaxLength(5)]
@@ -66,8 +68,12 @@ namespace CSApp
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // 创建索引--Product
+            //modelBuilder.Entity<Product>().Property(t => t.Category).HasColumnAnnotation(
+            //    "Index", new IndexAnnotation(new IndexAttribute("IX_Category") { IsUnique = true }));
+            modelBuilder.Entity<Product>().Property(t => t.DeviceNo).HasColumnAnnotation(
+                "Index", new IndexAnnotation(new IndexAttribute("IX_DeviceNoCategory", 1) { IsUnique = true }));
             modelBuilder.Entity<Product>().Property(t => t.Category).HasColumnAnnotation(
-                "Index", new IndexAnnotation(new IndexAttribute("IX_Category") { IsUnique = true }));
+                "Index", new IndexAnnotation(new IndexAttribute("IX_DeviceNoCategory", 2) { IsUnique = true }));
             // 创建索引--Printed
             modelBuilder.Entity<Printed>().Property(t => t.ProductId).HasColumnAnnotation(
                 "Index", new IndexAnnotation(new IndexAttribute("IX_ProductDatetime", 1) { IsUnique = true }));
@@ -88,12 +94,9 @@ namespace CSApp
         {
             var proudct = new List<Product>
             {
-                new Product { Category = "PRC6875-55L1", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+L", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6875-55L2", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+M", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6905-70L1", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+L", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6905-70L2", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+M", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6968-56C1", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+L", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6968-56C2", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+M", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { DeviceNo = "1", Category = "PRC6875-55L1/2", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { DeviceNo = "1", Category = "PRC6905-70L1/2", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { DeviceNo = "1", Category = "PRC6968-56C1/2", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
             };
             context.Product.AddRange(proudct);
             context.SaveChanges();//可以分次提交，也可以最后一次性提交给数据库
