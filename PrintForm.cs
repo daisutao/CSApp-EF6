@@ -11,20 +11,21 @@ using System.Text;
 using System.Windows.Forms;
 using CSApp.Properties;
 using Tkx.Lppa;
+using DateTime = System.DateTime;
 
 namespace CSApp
 {
-    public partial class MainForm : Form
+    public partial class PrintForm : Form
     {
         private Tkx.Lppa.Application NetApp = null;
         private Tkx.Lppa.Document ActiveDoc = null;
 
-        public MainForm()
+        public PrintForm()
         {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void PrintForm_Load(object sender, EventArgs e)
         {
             //context = new DataModelContext();
             // 通过代码初始化数据库 -- 方法1
@@ -43,11 +44,12 @@ namespace CSApp
             //NetApp = Tkx.Lppa.Application.SelectApplication();
             UpdatePrinterList();
 
+            Text += string.Format(Resources.DEVICE, ConfigurationManager.AppSettings["device"]);
+
             // 加载制品信息
             TreeNode node = new TreeNode {Text = Resources.APPLE_LBL};
             treeView1.Nodes.Add(node);
-            string device = ConfigurationManager.AppSettings["device"];
-            foreach (var product in Business.Context.Product.Where(c => c.DeviceNo == device).OrderBy(c => c.Category))
+            foreach (var product in Business.Context.Product.OrderBy(c => c.Category))
             {
                 node.Nodes.Add(new TreeNode
                 {
@@ -165,10 +167,8 @@ namespace CSApp
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (ActiveDoc == null) return;
-            var product = (Product)treeView1.SelectedNode.Tag;
-            string dateFlag = (System.DateTime.Now.Year % 10).ToString()
-                              + Common.GetWeekOfYear(System.DateTime.Now).ToString("00")
-                              + (Convert.ToInt32(System.DateTime.Now.DayOfWeek) + 1).ToString();
+            var product = (Product) treeView1.SelectedNode.Tag;
+            string dateFlag = Common.GetDateFlag(DateTime.Now);
             var printed = Business.GetPrinted(product.Id, dateFlag);
 
             int pqty = int.Parse(txtPQty.Text);
@@ -199,7 +199,8 @@ namespace CSApp
                     {
                         PrintedId = printed.Id,
                         Contents = barcode,
-                        QcSymbol = "B",
+                        //QcSymbol = "B",
+                        DeviceNo = ConfigurationManager.AppSettings["device"],
                     });
                     ActiveDoc.PrintLabel(1);
                 }
@@ -235,7 +236,7 @@ namespace CSApp
             {
                 lstLabels.Items.Clear();
 
-                var product = (Product)treeView1.SelectedNode.Tag;
+                var product = (Product) treeView1.SelectedNode.Tag;
 
                 string label = AppDomain.CurrentDomain.BaseDirectory + product.LabelFile;
                 if (!File.Exists(label))
@@ -248,7 +249,6 @@ namespace CSApp
                 else
                     pbLabelPreview.Image = null;
 
-                txtDeviceNo.Text = product.DeviceNo;
                 txtEngineer.Text = product.Engineer;
                 txtRevision.Text = product.Revision;
                 txtConfigure.Text = product.Configure;
@@ -261,7 +261,7 @@ namespace CSApp
         private void txtHPos_TextChanged(object sender, EventArgs e)
         {
             int value;
-            var product = (Product)treeView1.SelectedNode.Tag;
+            var product = (Product) treeView1.SelectedNode.Tag;
             if (int.TryParse(txtHPos.Text, out value) && value != product.HorzOffset)
             {
                 product.HorzOffset = value;
@@ -272,7 +272,7 @@ namespace CSApp
         private void txtVPos_TextChanged(object sender, EventArgs e)
         {
             int value;
-            var product = (Product)treeView1.SelectedNode.Tag;
+            var product = (Product) treeView1.SelectedNode.Tag;
             if (int.TryParse(txtVPos.Text, out value) && value != product.VertOffset)
             {
                 product.VertOffset = value;
@@ -283,7 +283,7 @@ namespace CSApp
         private void txtRows_TextChanged(object sender, EventArgs e)
         {
             int value;
-            var product = (Product)treeView1.SelectedNode.Tag;
+            var product = (Product) treeView1.SelectedNode.Tag;
             if (int.TryParse(txtRows.Text, out value) && value != product.PageLinage)
             {
                 product.PageLinage = value;
@@ -300,7 +300,7 @@ namespace CSApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var product = (Product)treeView1.SelectedNode.Tag;
+            var product = (Product) treeView1.SelectedNode.Tag;
             product.Engineer = txtEngineer.Text.Trim();
             product.Revision = txtRevision.Text.Trim();
             product.Configure = txtConfigure.Text.Trim();
@@ -308,6 +308,18 @@ namespace CSApp
             txtEngineer.Enabled = false;
             txtRevision.Enabled = false;
             txtConfigure.Enabled = false;
+        }
+
+        private void btnQuery_Click(object sender, EventArgs e)
+        {
+            QueryForm form = new QueryForm();
+            foreach (TreeNode node in treeView1.TopNode.Nodes)
+            {
+                Product product = (Product) node.Tag;
+                form.cbbCategory.Items.Add(product.Category);
+            }
+            form.ShowDialog();
+            form.Close();
         }
     }
 }

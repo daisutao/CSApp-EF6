@@ -1,5 +1,10 @@
-﻿using System;
+﻿using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System;
 using System.Globalization;
+using System.IO;
+using System.Windows.Forms;
+using CSApp.Properties;
 
 namespace CSApp
 {
@@ -10,11 +15,19 @@ namespace CSApp
         /// </summary>
         /// <param name="date">需要计算的时间</param>
         /// <returns>一年中第几个星期</returns>
-        public static int GetWeekOfYear(DateTime date)
+        private static int GetWeekOfYear(DateTime date)
         {
             GregorianCalendar gc = new GregorianCalendar();
             return gc.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
         }
+
+        public static string GetDateFlag(DateTime date)
+        {
+            return (date.Year % 10).ToString()
+                + GetWeekOfYear(date).ToString("00")
+                + (Convert.ToInt32(date.DayOfWeek) + 1).ToString();
+        }
+
         public static string ConvertDecimalToBase34(int i)
         {
             string chars = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
@@ -126,6 +139,80 @@ namespace CSApp
                     oddSum += ConvertBase34ToBase10(str.Substring(i - 1, 1));
             }
             return 34 - (oddSum * 3 + evenSum) % 34;
+        }
+        public static void GridToExcel(string fileName, DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0)
+            {
+                return;
+            }
+            fileName = fileName.Replace("/", "-");
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = Resources.EXCEL_FORMAT,
+                FileName = fileName
+            };
+            if (sfd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            IWorkbook wb = new XSSFWorkbook();
+            ISheet sheet = wb.CreateSheet(fileName);
+            IRow headRow = sheet.CreateRow(0);
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                ICell headCell = headRow.CreateCell(i, CellType.String);
+                headCell.SetCellValue(dgv.Columns[i].HeaderText);
+            }
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                IRow row = sheet.CreateRow(i + 1);
+                for (int j = 0; j < dgv.Columns.Count; j++)
+                {
+                    ICell cell = row.CreateCell(j);
+                    if (dgv.Rows[i].Cells[j].Value == null)
+                    {
+                        cell.SetCellType(CellType.Blank);
+                    }
+                    else
+                    {
+                        if (dgv.Rows[i].Cells[j].ValueType.FullName.Contains("System.Int32"))
+                        {
+                            cell.SetCellValue(Convert.ToInt32(dgv.Rows[i].Cells[j].Value));
+                        }
+                        else if (dgv.Rows[i].Cells[j].ValueType.FullName.Contains("System.String"))
+                        {
+                            cell.SetCellValue(dgv.Rows[i].Cells[j].Value.ToString());
+                        }
+                        else if (dgv.Rows[i].Cells[j].ValueType.FullName.Contains("System.Single"))
+                        {
+                            cell.SetCellValue(Convert.ToSingle(dgv.Rows[i].Cells[j].Value));
+                        }
+                        else if (dgv.Rows[i].Cells[j].ValueType.FullName.Contains("System.Double"))
+                        {
+                            cell.SetCellValue(Convert.ToDouble(dgv.Rows[i].Cells[j].Value));
+                        }
+                        else if (dgv.Rows[i].Cells[j].ValueType.FullName.Contains("System.Decimal"))
+                        {
+                            cell.SetCellValue(Convert.ToDouble(dgv.Rows[i].Cells[j].Value));
+                        }
+                        else if (dgv.Rows[i].Cells[j].ValueType.FullName.Contains("System.DateTime"))
+                        {
+                            cell.SetCellValue(Convert.ToDateTime(dgv.Rows[i].Cells[j].Value).ToString("yyyy-MM-dd"));
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                sheet.AutoSizeColumn(i);
+            }
+            using (FileStream fs = new FileStream(sfd.FileName, FileMode.Create))
+            {
+                wb.Write(fs);
+            }
+            MessageBox.Show(Resources.EXPORT_SUCCESS, Resources.INFOR,
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

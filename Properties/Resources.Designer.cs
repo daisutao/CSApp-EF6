@@ -70,11 +70,47 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似  -- {0}号机 的本地化字符串。
+        /// </summary>
+        internal static string DEVICE {
+            get {
+                return ResourceManager.GetString("DEVICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 错误 的本地化字符串。
         /// </summary>
         internal static string ERROR {
             get {
                 return ResourceManager.GetString("ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Excel 2007格式|*.xlsx 的本地化字符串。
+        /// </summary>
+        internal static string EXCEL_FORMAT {
+            get {
+                return ResourceManager.GetString("EXCEL_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导出成功！ 的本地化字符串。
+        /// </summary>
+        internal static string EXPORT_SUCCESS {
+            get {
+                return ResourceManager.GetString("EXPORT_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提示 的本地化字符串。
+        /// </summary>
+        internal static string INFOR {
+            get {
+                return ResourceManager.GetString("INFOR", resourceCulture);
             }
         }
         
@@ -93,6 +129,24 @@ namespace CSApp.Properties {
         internal static string NO_TEMPLATE {
             get {
                 return ResourceManager.GetString("NO_TEMPLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 指定条件无打印数据！ 的本地化字符串。
+        /// </summary>
+        internal static string QUERY_NULL {
+            get {
+                return ResourceManager.GetString("QUERY_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请先选择一个打印品目！ 的本地化字符串。
+        /// </summary>
+        internal static string SELECT_PRODUCT {
+            get {
+                return ResourceManager.GetString("SELECT_PRODUCT", resourceCulture);
             }
         }
     }

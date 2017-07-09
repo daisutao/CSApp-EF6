@@ -1,6 +1,6 @@
 namespace CSApp
 {
-    partial class MainForm
+    partial class PrintForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,15 @@ namespace CSApp
             this.btnPrint = new System.Windows.Forms.Button();
             this.lblPQty = new System.Windows.Forms.Label();
             this.grpSettings = new System.Windows.Forms.GroupBox();
+            this.btnQuery = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.txtConfigure = new System.Windows.Forms.TextBox();
             this.lblConfigure = new System.Windows.Forms.Label();
             this.txtRevision = new System.Windows.Forms.TextBox();
             this.lblRevision = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtEngineer = new System.Windows.Forms.TextBox();
             this.lblEngineer = new System.Windows.Forms.Label();
             this.txtRows = new System.Windows.Forms.TextBox();
@@ -45,10 +50,6 @@ namespace CSApp
             this.txtPQty = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.txtDeviceNo = new System.Windows.Forms.TextBox();
-            this.lblDeviceNo = new System.Windows.Forms.Label();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.grpVariables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).BeginInit();
             this.grpSettings.SuspendLayout();
@@ -180,11 +181,11 @@ namespace CSApp
             // 
             this.btnPrint.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnPrint.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPrint.Location = new System.Drawing.Point(302, 150);
+            this.btnPrint.Location = new System.Drawing.Point(322, 150);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(94, 22);
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 10;
-            this.btnPrint.Text = "打印测试";
+            this.btnPrint.Text = "打印";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
@@ -199,14 +200,15 @@ namespace CSApp
             // 
             // grpSettings
             // 
+            this.grpSettings.Controls.Add(this.btnQuery);
+            this.grpSettings.Controls.Add(this.button1);
             this.grpSettings.Controls.Add(this.btnSave);
             this.grpSettings.Controls.Add(this.btnEdit);
-            this.grpSettings.Controls.Add(this.txtDeviceNo);
-            this.grpSettings.Controls.Add(this.lblDeviceNo);
             this.grpSettings.Controls.Add(this.txtConfigure);
             this.grpSettings.Controls.Add(this.lblConfigure);
             this.grpSettings.Controls.Add(this.txtRevision);
             this.grpSettings.Controls.Add(this.lblRevision);
+            this.grpSettings.Controls.Add(this.label1);
             this.grpSettings.Controls.Add(this.txtEngineer);
             this.grpSettings.Controls.Add(this.lblEngineer);
             this.grpSettings.Controls.Add(this.txtRows);
@@ -221,16 +223,62 @@ namespace CSApp
             this.grpSettings.ForeColor = System.Drawing.SystemColors.ControlText;
             this.grpSettings.Location = new System.Drawing.Point(221, 268);
             this.grpSettings.Name = "grpSettings";
-            this.grpSettings.Size = new System.Drawing.Size(402, 178);
+            this.grpSettings.Size = new System.Drawing.Size(402, 184);
             this.grpSettings.TabIndex = 17;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "打印设置";
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.Location = new System.Drawing.Point(241, 150);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(75, 23);
+            this.btnQuery.TabIndex = 31;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.UseVisualStyleBackColor = true;
+            this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button1.Location = new System.Drawing.Point(136, 101);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(57, 22);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "保存";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSave.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSave.Location = new System.Drawing.Point(136, 101);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(57, 22);
+            this.btnSave.TabIndex = 30;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnEdit.Location = new System.Drawing.Point(78, 101);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(57, 22);
+            this.btnEdit.TabIndex = 29;
+            this.btnEdit.Text = "修改";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // txtConfigure
             // 
             this.txtConfigure.Enabled = false;
             this.txtConfigure.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtConfigure.Location = new System.Drawing.Point(137, 123);
+            this.txtConfigure.Location = new System.Drawing.Point(141, 74);
             this.txtConfigure.Name = "txtConfigure";
             this.txtConfigure.Size = new System.Drawing.Size(52, 21);
             this.txtConfigure.TabIndex = 26;
@@ -238,7 +286,7 @@ namespace CSApp
             // lblConfigure
             // 
             this.lblConfigure.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblConfigure.Location = new System.Drawing.Point(72, 126);
+            this.lblConfigure.Location = new System.Drawing.Point(76, 77);
             this.lblConfigure.Name = "lblConfigure";
             this.lblConfigure.Size = new System.Drawing.Size(65, 15);
             this.lblConfigure.TabIndex = 25;
@@ -248,7 +296,7 @@ namespace CSApp
             // 
             this.txtRevision.Enabled = false;
             this.txtRevision.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtRevision.Location = new System.Drawing.Point(137, 96);
+            this.txtRevision.Location = new System.Drawing.Point(141, 47);
             this.txtRevision.Name = "txtRevision";
             this.txtRevision.Size = new System.Drawing.Size(52, 21);
             this.txtRevision.TabIndex = 24;
@@ -256,17 +304,26 @@ namespace CSApp
             // lblRevision
             // 
             this.lblRevision.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblRevision.Location = new System.Drawing.Point(72, 99);
+            this.lblRevision.Location = new System.Drawing.Point(76, 50);
             this.lblRevision.Name = "lblRevision";
             this.lblRevision.Size = new System.Drawing.Size(65, 15);
             this.lblRevision.TabIndex = 23;
             this.lblRevision.Text = "版本号：";
             // 
+            // label1
+            // 
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(76, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 15);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "机种码：";
+            // 
             // txtEngineer
             // 
             this.txtEngineer.Enabled = false;
             this.txtEngineer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtEngineer.Location = new System.Drawing.Point(137, 69);
+            this.txtEngineer.Location = new System.Drawing.Point(141, 20);
             this.txtEngineer.Name = "txtEngineer";
             this.txtEngineer.Size = new System.Drawing.Size(52, 21);
             this.txtEngineer.TabIndex = 22;
@@ -274,7 +331,7 @@ namespace CSApp
             // lblEngineer
             // 
             this.lblEngineer.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblEngineer.Location = new System.Drawing.Point(72, 72);
+            this.lblEngineer.Location = new System.Drawing.Point(76, 23);
             this.lblEngineer.Name = "lblEngineer";
             this.lblEngineer.Size = new System.Drawing.Size(65, 15);
             this.lblEngineer.TabIndex = 21;
@@ -361,49 +418,7 @@ namespace CSApp
             this.treeView1.TabIndex = 19;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
-            // txtDeviceNo
-            // 
-            this.txtDeviceNo.Enabled = false;
-            this.txtDeviceNo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtDeviceNo.Location = new System.Drawing.Point(137, 20);
-            this.txtDeviceNo.Name = "txtDeviceNo";
-            this.txtDeviceNo.Size = new System.Drawing.Size(52, 21);
-            this.txtDeviceNo.TabIndex = 28;
-            // 
-            // lblDeviceNo
-            // 
-            this.lblDeviceNo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDeviceNo.Location = new System.Drawing.Point(72, 23);
-            this.lblDeviceNo.Name = "lblDeviceNo";
-            this.lblDeviceNo.Size = new System.Drawing.Size(65, 15);
-            this.lblDeviceNo.TabIndex = 27;
-            this.lblDeviceNo.Text = "设备号：";
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEdit.Location = new System.Drawing.Point(74, 150);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(57, 22);
-            this.btnEdit.TabIndex = 29;
-            this.btnEdit.Text = "修改";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnSave.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSave.Location = new System.Drawing.Point(132, 150);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(57, 22);
-            this.btnSave.TabIndex = 30;
-            this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // MainForm
+            // PrintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -414,10 +429,10 @@ namespace CSApp
             this.Controls.Add(this.lblLabelFolder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MinimumSize = new System.Drawing.Size(500, 372);
-            this.Name = "MainForm";
+            this.Name = "PrintForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CodeSoft 打印测试程序";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Text = "MFLEX 打印程序";
+            this.Load += new System.EventHandler(this.PrintForm_Load);
             this.grpVariables.ResumeLayout(false);
             this.grpVariables.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).EndInit();
@@ -459,10 +474,11 @@ namespace CSApp
         private System.Windows.Forms.Label lblRevision;
         private System.Windows.Forms.TextBox txtEngineer;
         private System.Windows.Forms.Label lblEngineer;
-        private System.Windows.Forms.TextBox txtDeviceNo;
-        private System.Windows.Forms.Label lblDeviceNo;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnQuery;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
