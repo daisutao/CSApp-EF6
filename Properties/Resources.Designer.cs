@@ -115,6 +115,15 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 请输入Day Flag！ 的本地化字符串。
+        /// </summary>
+        internal static string INPUT_DAY_FLAG {
+            get {
+                return ResourceManager.GetString("INPUT_DAY_FLAG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已经打印条码数量{0}，到达本日的打印上限！ 的本地化字符串。
         /// </summary>
         internal static string MAX_LIMIT {
@@ -142,7 +151,7 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
-        ///   查找类似 请先选择一个打印品目！ 的本地化字符串。
+        ///   查找类似 请选择一个打印品目！ 的本地化字符串。
         /// </summary>
         internal static string SELECT_PRODUCT {
             get {

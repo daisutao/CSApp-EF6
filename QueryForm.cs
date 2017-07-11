@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using CSApp.Properties;
 
@@ -27,11 +22,16 @@ namespace CSApp
         {
             if (cbbCategory.Text.Equals(string.Empty))
             {
-                MessageBox.Show(Resources.SELECT_PRODUCT, Resources.ERROR);
+                MessageBox.Show(Resources.SELECT_PRODUCT, Resources.INFOR);
                 return;
             }
-
-            List<Barcode> barcodes = Business.GetBarcodeList(cbbCategory.Text, dtpPrintDate.Value);
+            if (txtDayFlag.Text.Equals(string.Empty))
+            {
+                MessageBox.Show(Resources.INPUT_DAY_FLAG, Resources.INFOR);
+                return;
+            }
+            string dateFlag = Common.GetWeekFlag(dtpPrintDate.Value) + txtDayFlag.Text.ToUpper();
+            List<Barcode> barcodes = Business.GetBarcodeList(cbbCategory.Text, dateFlag);
             if (barcodes == null)
             {
                 MessageBox.Show(Resources.QUERY_NULL, Resources.ERROR);
@@ -39,7 +39,6 @@ namespace CSApp
             }
             
             dataGridView1.DataSource = barcodes;
-            dataGridView1.Columns["Id"].Visible = false;
             dataGridView1.Columns["Id"].Visible = false;
             dataGridView1.Columns["PrintedId"].Visible = false;
             dataGridView1.Columns["Printed"].Visible = false;
@@ -50,7 +49,7 @@ namespace CSApp
         {
             if (dataGridView1.RowCount == 0)
             {
-                MessageBox.Show("未查询或者查询结果为空！");
+                MessageBox.Show("未查询或者查询结果为空！", Resources.INFOR);
                 return;
             }
             Common.GridToExcel(cbbCategory.Text, dataGridView1);

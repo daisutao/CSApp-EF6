@@ -28,6 +28,12 @@ namespace CSApp
                 + (Convert.ToInt32(date.DayOfWeek) + 1).ToString();
         }
 
+        public static string GetWeekFlag(DateTime date)
+        {
+            return (date.Year % 10).ToString()
+                   + GetWeekOfYear(date).ToString("00");
+        }
+
         public static string ConvertDecimalToBase34(int i)
         {
             string chars = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";

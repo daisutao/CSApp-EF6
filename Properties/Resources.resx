@@ -133,7 +133,7 @@
     <value> -- {0}号机</value>
   </data>
   <data name="SELECT_PRODUCT" xml:space="preserve">
-    <value>请先选择一个打印品目！</value>
+    <value>请选择一个打印品目！</value>
   </data>
   <data name="QUERY_NULL" xml:space="preserve">
     <value>指定条件无打印数据！</value>
@@ -146,5 +146,8 @@
   </data>
   <data name="EXPORT_SUCCESS" xml:space="preserve">
     <value>导出成功！</value>
+  </data>
+  <data name="INPUT_DAY_FLAG" xml:space="preserve">
+    <value>请输入Day Flag！</value>
   </data>
 </root>

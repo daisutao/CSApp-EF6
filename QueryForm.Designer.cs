@@ -36,12 +36,16 @@
             this.dtpPrintDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.txtDayFlag = new System.Windows.Forms.TextBox();
+            this.lblDayFlag = new System.Windows.Forms.Label();
             this.grpQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // grpQuery
             // 
+            this.grpQuery.Controls.Add(this.txtDayFlag);
+            this.grpQuery.Controls.Add(this.lblDayFlag);
             this.grpQuery.Controls.Add(this.btnExcel);
             this.grpQuery.Controls.Add(this.cbbCategory);
             this.grpQuery.Controls.Add(this.btnQuery);
@@ -122,6 +126,24 @@
             this.dataGridView1.Size = new System.Drawing.Size(784, 511);
             this.dataGridView1.TabIndex = 1;
             // 
+            // txtDayFlag
+            // 
+            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtDayFlag.Location = new System.Drawing.Point(479, 22);
+            this.txtDayFlag.MaxLength = 1;
+            this.txtDayFlag.Name = "txtDayFlag";
+            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
+            this.txtDayFlag.TabIndex = 35;
+            // 
+            // lblDayFlag
+            // 
+            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDayFlag.Location = new System.Drawing.Point(408, 25);
+            this.lblDayFlag.Name = "lblDayFlag";
+            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
+            this.lblDayFlag.TabIndex = 34;
+            this.lblDayFlag.Text = "Day Flag：";
+            // 
             // QueryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -151,5 +173,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         public System.Windows.Forms.ComboBox cbbCategory;
         private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.TextBox txtDayFlag;
+        private System.Windows.Forms.Label lblDayFlag;
     }
 }

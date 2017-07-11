@@ -1,24 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 using CSApp.Properties;
 using Tkx.Lppa;
-using DateTime = System.DateTime;
 
 namespace CSApp
 {
     public partial class PrintForm : Form
     {
-        private Tkx.Lppa.Application NetApp = null;
-        private Tkx.Lppa.Document ActiveDoc = null;
+        private Tkx.Lppa.Application _csApp;
+        private Document _csDoc;
 
         public PrintForm()
         {
@@ -40,8 +34,8 @@ namespace CSApp
             
             dbInitializer.InitializeDatabase(context);*/
 
-            NetApp = new Tkx.Lppa.Application();
-            //NetApp = Tkx.Lppa.Application.SelectApplication();
+            _csApp = new Tkx.Lppa.Application();
+            //_csApp = Tkx.Lppa.Application.SelectApplication();
             UpdatePrinterList();
 
             Text += string.Format(Resources.DEVICE, ConfigurationManager.AppSettings["device"]);
@@ -67,14 +61,14 @@ namespace CSApp
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                ActiveDoc.Close(false);
-                ActiveDoc.Dispose();
+                _csDoc.Close(false);
+                _csDoc.Dispose();
             }
 
-            if(NetApp != null)
-                NetApp.Quit();
+            if(_csApp != null)
+                _csApp.Quit();
 
             if (Business.Context != null)
                 Business.Context.Dispose();
@@ -90,7 +84,7 @@ namespace CSApp
         {
             cbbPrinter.Items.Clear();
 
-            string[] printers = NetApp.PrinterSystem.PrintersNames(KindOfPrinters.AllPrinters);
+            string[] printers = _csApp.PrinterSystem.PrintersNames(KindOfPrinters.AllPrinters);
             foreach (string printer in printers)
             {
                 cbbPrinter.Items.Add(printer);
@@ -99,17 +93,17 @@ namespace CSApp
 
         private void UpdateSelectedPrinter()
         {
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                cbbPrinter.SelectedIndex = cbbPrinter.Items.IndexOf(ActiveDoc.Printer.Name);
+                cbbPrinter.SelectedIndex = cbbPrinter.Items.IndexOf(_csDoc.Printer.Name);
             }
         }
 
         private void UpdateLabelPreview()
         {
-            if(ActiveDoc != null)
+            if(_csDoc != null)
             {
-                pbLabelPreview.Image = ActiveDoc != null ? ActiveDoc.GetPreview(true, true, 400) : null;
+                pbLabelPreview.Image = _csDoc != null ? _csDoc.GetPreview(true, true, 400) : null;
             }
         }
 
@@ -117,9 +111,9 @@ namespace CSApp
         {
             lstVariables.Items.Clear();
 
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                foreach (Variable aVariable in ActiveDoc.Variables)
+                foreach (Variable aVariable in _csDoc.Variables)
                 {
                     lstVariables.Items.Add(aVariable.Name);
                 }
@@ -131,14 +125,14 @@ namespace CSApp
 
         private void lstLabels_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                ActiveDoc.Close(false);
-                ActiveDoc.Dispose();
-                ActiveDoc = null;
+                _csDoc.Close(false);
+                _csDoc.Dispose();
+                _csDoc = null;
             }
 
-            ActiveDoc = NetApp.Documents.Open(AppDomain.CurrentDomain.BaseDirectory + lstLabels.Text, false);
+            _csDoc = _csApp.Documents.Open(AppDomain.CurrentDomain.BaseDirectory + lstLabels.Text, false);
             UpdateLabelPreview();
             UpdateVarList();
             UpdateSelectedPrinter();
@@ -146,18 +140,18 @@ namespace CSApp
 
         private void lstVariables_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                Variable aVariable = ActiveDoc.Variables[lstVariables.Text];
+                Variable aVariable = _csDoc.Variables[lstVariables.Text];
                 lblVarValue.Text = aVariable.Value;
             }            
         }
 
         private void btnUpdateVar_Click(object sender, EventArgs e)
         {
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                Variable aVariable = ActiveDoc.Variables[lstVariables.Text];
+                Variable aVariable = _csDoc.Variables[lstVariables.Text];
                 aVariable.Value = lblVarValue.Text;
             } 
 
@@ -166,13 +160,19 @@ namespace CSApp
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if (ActiveDoc == null) return;
+            if (_csDoc == null) return;
+            if (txtDayFlag.Text.Trim().Equals(string.Empty))
+            {
+                MessageBox.Show(Resources.INPUT_DAY_FLAG, Resources.INFOR);
+                return;
+            }
+
             var product = (Product) treeView1.SelectedNode.Tag;
-            string dateFlag = Common.GetDateFlag(DateTime.Now);
+            string dateFlag = Common.GetWeekFlag(System.DateTime.Now) + txtDayFlag.Text.ToUpper();
             var printed = Business.GetPrinted(product.Id, dateFlag);
 
             int pqty = int.Parse(txtPQty.Text);
-            int page = int.Parse(txtRows.Text) * ActiveDoc.Format.ColumnCount;
+            int page = int.Parse(txtRows.Text) * _csDoc.Format.ColumnCount;
             while (pqty > 0)
             {
                 if (!Business.SetPrinted(printed, (int)Math.Pow(34, 4) - 1, page))
@@ -180,9 +180,9 @@ namespace CSApp
                     MessageBox.Show(string.Format(Resources.MAX_LIMIT, printed.TotalNum), Resources.ERROR);
                     return;
                 }
-                ActiveDoc.HorzPrintOffset = int.Parse(txtHPos.Text);
-                ActiveDoc.VertPrintOffset = int.Parse(txtVPos.Text);
-                ActiveDoc.FullClippingMode = true;
+                _csDoc.HorzPrintOffset = int.Parse(txtHPos.Text);
+                _csDoc.VertPrintOffset = int.Parse(txtVPos.Text);
+                _csDoc.FullClippingMode = true;
                     
                 for (int i = printed.TotalNum - page; i < printed.TotalNum; ++i)
                 {
@@ -190,9 +190,9 @@ namespace CSApp
                                      + Common.ConvertDecimalToBase34(i) + product.Engineer + product.Revision;
                     barcode += Common.ConvertBase10ToBase34(Common.GetCheckSum(barcode)) + product.Configure;
 
-                    ActiveDoc.Variables["var0"].Value = barcode;
-                    ActiveDoc.Variables["var1"].Value = barcode.Substring(0, 11);
-                    ActiveDoc.Variables["var2"].Value = barcode.Substring(11);
+                    _csDoc.Variables["var0"].Value = barcode;
+                    _csDoc.Variables["var1"].Value = barcode.Substring(0, 11);
+                    _csDoc.Variables["var2"].Value = barcode.Substring(11);
                     UpdateLabelPreview();
 
                     Business.Context.Barcode.Add(new Barcode
@@ -202,10 +202,10 @@ namespace CSApp
                         //QcSymbol = "B",
                         DeviceNo = ConfigurationManager.AppSettings["device"],
                     });
-                    ActiveDoc.PrintLabel(1);
+                    _csDoc.PrintLabel(1);
                 }
                 Business.Context.SaveChanges();
-                ActiveDoc.FormFeed();
+                _csDoc.FormFeed();
                 --pqty;
             }
         }
@@ -214,7 +214,7 @@ namespace CSApp
         {
             try
             {
-                NetApp.Dialogs[DialogType.PrinterSetup].Show((int)Handle);
+                _csApp.Dialogs[DialogType.PrinterSetup].Show((int)Handle);
             }
             catch (COMException)
             {
@@ -223,10 +223,10 @@ namespace CSApp
 
         private void cbbPrinter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ActiveDoc != null)
+            if (_csDoc != null)
             {
-                ActiveDoc.Printer.SwitchTo(cbbPrinter.Text);
-                //ActiveDoc.Printer.HeadTemperature = 20; //SetParameter(PrinterSettings.HeadTemperature, new int?(20));
+                _csDoc.Printer.SwitchTo(cbbPrinter.Text);
+                //_csDoc.Printer.HeadTemperature = 20; //SetParameter(PrinterSettings.HeadTemperature, new int?(20));
             }
         }
 

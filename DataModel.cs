@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace CSApp
@@ -148,10 +146,9 @@ namespace CSApp
             }
         }
 
-        public static List<Barcode> GetBarcodeList(string category, DateTime date)
+        public static List<Barcode> GetBarcodeList(string category, string dateFlag)
         {
             var product = Context.Product.FirstOrDefault(p => p.Category == category);
-            string dateFlag = Common.GetDateFlag(date);
             var printed = Context.Printed.Include("Barcodes")
                 .FirstOrDefault(p => p.ProductId == product.Id && p.DateFlag == dateFlag);
             if (printed == null)
