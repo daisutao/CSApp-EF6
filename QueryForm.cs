@@ -39,9 +39,12 @@ namespace CSApp
             }
             
             dataGridView1.DataSource = barcodes;
-            dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Columns["PrintedId"].Visible = false;
-            dataGridView1.Columns["Printed"].Visible = false;
+            string[] cols = { "Id", "PrintedId", "Printed" };
+            foreach (var col in cols)
+            {
+                var dataGridViewColumn = dataGridView1.Columns[col];
+                if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+            }
             dataGridView1.Refresh();
         }
 
@@ -49,7 +52,7 @@ namespace CSApp
         {
             if (dataGridView1.RowCount == 0)
             {
-                MessageBox.Show("未查询或者查询结果为空！", Resources.INFOR);
+                MessageBox.Show(Resources.QUERY_NONE_NULL, Resources.INFOR);
                 return;
             }
             Common.GridToExcel(cbbCategory.Text, dataGridView1);

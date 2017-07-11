@@ -150,4 +150,7 @@
   <data name="INPUT_DAY_FLAG" xml:space="preserve">
     <value>请输入Day Flag！</value>
   </data>
+  <data name="QUERY_NONE_NULL" xml:space="preserve">
+    <value>未查询或者查询结果为空！</value>
+  </data>
 </root>

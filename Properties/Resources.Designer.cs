@@ -142,6 +142,15 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 未查询或者查询结果为空！ 的本地化字符串。
+        /// </summary>
+        internal static string QUERY_NONE_NULL {
+            get {
+                return ResourceManager.GetString("QUERY_NONE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 指定条件无打印数据！ 的本地化字符串。
         /// </summary>
         internal static string QUERY_NULL {
