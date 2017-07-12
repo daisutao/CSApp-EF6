@@ -38,7 +38,7 @@ namespace CSApp
             //_csApp = Tkx.Lppa.Application.SelectApplication();
             UpdatePrinterList();
 
-            Text += string.Format(Resources.DEVICE, ConfigurationManager.AppSettings["device"]);
+            Text += string.Format(Resources.DEVICE_NAME, ConfigurationManager.AppSettings["device"]);
 
             // 加载制品信息
             TreeNode node = new TreeNode {Text = Resources.APPLE_LBL};

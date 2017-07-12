@@ -129,7 +129,7 @@
   <data name="ERROR" xml:space="preserve">
     <value>错误</value>
   </data>
-  <data name="DEVICE" xml:space="preserve">
+  <data name="DEVICE_NAME" xml:space="preserve">
     <value> -- {0}号机</value>
   </data>
   <data name="SELECT_PRODUCT" xml:space="preserve">
@@ -145,7 +145,7 @@
     <value>提示</value>
   </data>
   <data name="EXPORT_SUCCESS" xml:space="preserve">
-    <value>导出成功！</value>
+    <value>导出Excel数据成功！</value>
   </data>
   <data name="INPUT_DAY_FLAG" xml:space="preserve">
     <value>请输入Day Flag！</value>
