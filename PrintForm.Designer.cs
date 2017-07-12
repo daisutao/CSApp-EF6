@@ -30,6 +30,8 @@ namespace CSApp
             this.btnPrint = new System.Windows.Forms.Button();
             this.lblPQty = new System.Windows.Forms.Label();
             this.grpSettings = new System.Windows.Forms.GroupBox();
+            this.txtDayFlag = new System.Windows.Forms.TextBox();
+            this.lblDayFlag = new System.Windows.Forms.Label();
             this.btnQuery = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -50,8 +52,6 @@ namespace CSApp
             this.txtPQty = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.txtDayFlag = new System.Windows.Forms.TextBox();
-            this.lblDayFlag = new System.Windows.Forms.Label();
             this.grpVariables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).BeginInit();
             this.grpSettings.SuspendLayout();
@@ -231,6 +231,26 @@ namespace CSApp
             this.grpSettings.TabIndex = 17;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "¥Ú”°…Ë÷√";
+            // 
+            // txtDayFlag
+            // 
+            this.txtDayFlag.Enabled = false;
+            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtDayFlag.Location = new System.Drawing.Point(260, 151);
+            this.txtDayFlag.MaxLength = 1;
+            this.txtDayFlag.Name = "txtDayFlag";
+            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
+            this.txtDayFlag.TabIndex = 33;
+            this.txtDayFlag.Text = "2";
+            // 
+            // lblDayFlag
+            // 
+            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDayFlag.Location = new System.Drawing.Point(195, 154);
+            this.lblDayFlag.Name = "lblDayFlag";
+            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
+            this.lblDayFlag.TabIndex = 32;
+            this.lblDayFlag.Text = "Day Flag£∫";
             // 
             // btnQuery
             // 
@@ -421,24 +441,6 @@ namespace CSApp
             this.treeView1.Size = new System.Drawing.Size(188, 414);
             this.treeView1.TabIndex = 19;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            // 
-            // txtDayFlag
-            // 
-            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtDayFlag.Location = new System.Drawing.Point(260, 151);
-            this.txtDayFlag.MaxLength = 1;
-            this.txtDayFlag.Name = "txtDayFlag";
-            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
-            this.txtDayFlag.TabIndex = 33;
-            // 
-            // lblDayFlag
-            // 
-            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDayFlag.Location = new System.Drawing.Point(195, 154);
-            this.lblDayFlag.Name = "lblDayFlag";
-            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
-            this.lblDayFlag.TabIndex = 32;
-            this.lblDayFlag.Text = "Day Flag£∫";
             // 
             // PrintForm
             // 
