@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -41,18 +42,7 @@ namespace CSApp
             Text += string.Format(Resources.DEVICE, ConfigurationManager.AppSettings["device"]);
 
             // 加载制品信息
-            TreeNode node = new TreeNode {Text = Resources.APPLE_LBL};
-            treeView1.Nodes.Add(node);
-            foreach (var product in Business.Context.Product.OrderBy(c => c.Category))
-            {
-                node.Nodes.Add(new TreeNode
-                {
-                    Text = product.Category,
-                    Tag = product
-                }); //node下的子节点
-            }
-            if (node.Nodes.Count > 0)
-                treeView1.SelectedNode = node.Nodes[0];
+            UpdateTreeView();
         }
 
         /// <summary>
@@ -97,6 +87,23 @@ namespace CSApp
             {
                 cbbPrinter.SelectedIndex = cbbPrinter.Items.IndexOf(_csDoc.Printer.Name);
             }
+        }
+
+        private void UpdateTreeView()
+        {
+            treeView1.Nodes.Clear();
+            TreeNode node = new TreeNode { Text = Resources.APPLE_LBL };
+            treeView1.Nodes.Add(node);
+            foreach (var product in Business.Context.Product.OrderBy(c => c.Category))
+            {
+                node.Nodes.Add(new TreeNode
+                {
+                    Text = product.Category,
+                    Tag = product
+                }); //node下的子节点
+            }
+            if (node.Nodes.Count > 0)
+                treeView1.SelectedNode = node.Nodes[0];
         }
 
         private void UpdateLabelPreview()
@@ -320,6 +327,43 @@ namespace CSApp
             }
             form.ShowDialog();
             form.Close();
+        }
+
+        private void tsmCopy_Click(object sender, EventArgs e)
+        {
+            CopyForm form = new CopyForm((Product)treeView1.SelectedNode.Tag, true);
+            form.ShowDialog();
+            form.Close();
+
+            UpdateTreeView();
+        }
+
+        private void tsmEdit_Click(object sender, EventArgs e)
+        {
+            CopyForm form = new CopyForm((Product)treeView1.SelectedNode.Tag, false);
+            form.ShowDialog();
+            form.Close();
+
+            UpdateTreeView();
+        }
+
+        private void treeView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) //判断你点的是不是右键
+            {
+                Point point = new Point(e.X, e.Y);
+                TreeNode node = treeView1.GetNodeAt(point);
+                if (node != null && node.Level == 1) //判断你点的是不是一个节点
+                {
+                    node.ContextMenuStrip = contextMenuStrip1;
+                    treeView1.SelectedNode = node;//选中这个节点
+                }
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

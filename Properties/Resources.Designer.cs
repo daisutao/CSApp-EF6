@@ -115,6 +115,15 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 请输入品目码！ 的本地化字符串。
+        /// </summary>
+        internal static string INPUT_CATEGORY {
+            get {
+                return ResourceManager.GetString("INPUT_CATEGORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 请输入Day Flag！ 的本地化字符串。
         /// </summary>
         internal static string INPUT_DAY_FLAG {

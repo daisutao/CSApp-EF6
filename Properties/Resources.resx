@@ -153,4 +153,7 @@
   <data name="QUERY_NONE_NULL" xml:space="preserve">
     <value>未查询或者查询结果为空！</value>
   </data>
+  <data name="INPUT_CATEGORY" xml:space="preserve">
+    <value>请输入品目码！</value>
+  </data>
 </root>

@@ -16,6 +16,7 @@ namespace CSApp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblLabelFolder = new System.Windows.Forms.Label();
             this.lstVariables = new System.Windows.Forms.ListBox();
             this.grpVariables = new System.Windows.Forms.GroupBox();
@@ -30,6 +31,8 @@ namespace CSApp
             this.btnPrint = new System.Windows.Forms.Button();
             this.lblPQty = new System.Windows.Forms.Label();
             this.grpSettings = new System.Windows.Forms.GroupBox();
+            this.txtDayFlag = new System.Windows.Forms.TextBox();
+            this.lblDayFlag = new System.Windows.Forms.Label();
             this.btnQuery = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -50,12 +53,14 @@ namespace CSApp
             this.txtPQty = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.txtDayFlag = new System.Windows.Forms.TextBox();
-            this.lblDayFlag = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.grpVariables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).BeginInit();
             this.grpSettings.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLabelFolder
@@ -231,6 +236,24 @@ namespace CSApp
             this.grpSettings.TabIndex = 17;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "打印设置";
+            // 
+            // txtDayFlag
+            // 
+            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtDayFlag.Location = new System.Drawing.Point(260, 151);
+            this.txtDayFlag.MaxLength = 1;
+            this.txtDayFlag.Name = "txtDayFlag";
+            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
+            this.txtDayFlag.TabIndex = 33;
+            // 
+            // lblDayFlag
+            // 
+            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDayFlag.Location = new System.Drawing.Point(195, 154);
+            this.lblDayFlag.Name = "lblDayFlag";
+            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
+            this.lblDayFlag.TabIndex = 32;
+            this.lblDayFlag.Text = "Day Flag：";
             // 
             // btnQuery
             // 
@@ -421,24 +444,30 @@ namespace CSApp
             this.treeView1.Size = new System.Drawing.Size(188, 414);
             this.treeView1.TabIndex = 19;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
             // 
-            // txtDayFlag
+            // contextMenuStrip1
             // 
-            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtDayFlag.Location = new System.Drawing.Point(260, 151);
-            this.txtDayFlag.MaxLength = 1;
-            this.txtDayFlag.Name = "txtDayFlag";
-            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
-            this.txtDayFlag.TabIndex = 33;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmCopy,
+            this.tsmEdit});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
-            // lblDayFlag
+            // tsmCopy
             // 
-            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDayFlag.Location = new System.Drawing.Point(195, 154);
-            this.lblDayFlag.Name = "lblDayFlag";
-            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
-            this.lblDayFlag.TabIndex = 32;
-            this.lblDayFlag.Text = "Day Flag：";
+            this.tsmCopy.Name = "tsmCopy";
+            this.tsmCopy.Size = new System.Drawing.Size(152, 22);
+            this.tsmCopy.Text = "复制";
+            this.tsmCopy.Click += new System.EventHandler(this.tsmCopy_Click);
+            // 
+            // tsmEdit
+            // 
+            this.tsmEdit.Name = "tsmEdit";
+            this.tsmEdit.Size = new System.Drawing.Size(152, 22);
+            this.tsmEdit.Text = "修改";
+            this.tsmEdit.Click += new System.EventHandler(this.tsmEdit_Click);
             // 
             // PrintForm
             // 
@@ -461,6 +490,7 @@ namespace CSApp
             this.grpSettings.ResumeLayout(false);
             this.grpSettings.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -503,6 +533,9 @@ namespace CSApp
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDayFlag;
         private System.Windows.Forms.Label lblDayFlag;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tsmCopy;
+        private System.Windows.Forms.ToolStripMenuItem tsmEdit;
     }
 }
 

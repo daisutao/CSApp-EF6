@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Annotations;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Threading;
@@ -115,6 +116,13 @@ namespace CSApp
                 return _dbContext;
             }
         }
+
+        public static void SaveProduct(Product product)
+        {
+            Context.Product.AddOrUpdate(product);
+            Context.SaveChanges();
+        }
+
         public static Printed GetPrinted(int id, string dateFlag)
         {
             var printed = Context.Printed.FirstOrDefault(p => p.ProductId == id && p.DateFlag == dateFlag);

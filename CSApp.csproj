@@ -112,6 +112,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="CopyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyForm.Designer.cs">
+      <DependentUpon>CopyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataModel.cs" />
     <Compile Include="QueryForm.cs">
       <SubType>Form</SubType>
@@ -127,6 +133,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CopyForm.resx">
+      <DependentUpon>CopyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PrintForm.cs</DependentUpon>
