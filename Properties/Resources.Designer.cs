@@ -72,9 +72,9 @@ namespace CSApp.Properties {
         /// <summary>
         ///   查找类似  -- {0}号机 的本地化字符串。
         /// </summary>
-        internal static string DEVICE {
+        internal static string DEVICE_NAME {
             get {
-                return ResourceManager.GetString("DEVICE", resourceCulture);
+                return ResourceManager.GetString("DEVICE_NAME", resourceCulture);
             }
         }
         
@@ -97,7 +97,7 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
-        ///   查找类似 导出成功！ 的本地化字符串。
+        ///   查找类似 导出Excel数据成功！ 的本地化字符串。
         /// </summary>
         internal static string EXPORT_SUCCESS {
             get {

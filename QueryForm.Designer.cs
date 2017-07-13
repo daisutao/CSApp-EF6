@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.grpQuery = new System.Windows.Forms.GroupBox();
+            this.txtDayFlag = new System.Windows.Forms.TextBox();
+            this.lblDayFlag = new System.Windows.Forms.Label();
             this.btnExcel = new System.Windows.Forms.Button();
             this.cbbCategory = new System.Windows.Forms.ComboBox();
             this.btnQuery = new System.Windows.Forms.Button();
@@ -36,8 +38,6 @@
             this.dtpPrintDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtDayFlag = new System.Windows.Forms.TextBox();
-            this.lblDayFlag = new System.Windows.Forms.Label();
             this.grpQuery.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +59,26 @@
             this.grpQuery.TabIndex = 0;
             this.grpQuery.TabStop = false;
             this.grpQuery.Text = "查询条件";
+            // 
+            // txtDayFlag
+            // 
+            this.txtDayFlag.Enabled = false;
+            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtDayFlag.Location = new System.Drawing.Point(479, 22);
+            this.txtDayFlag.MaxLength = 1;
+            this.txtDayFlag.Name = "txtDayFlag";
+            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
+            this.txtDayFlag.TabIndex = 35;
+            this.txtDayFlag.Text = "2";
+            // 
+            // lblDayFlag
+            // 
+            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblDayFlag.Location = new System.Drawing.Point(408, 25);
+            this.lblDayFlag.Name = "lblDayFlag";
+            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
+            this.lblDayFlag.TabIndex = 34;
+            this.lblDayFlag.Text = "Day Flag：";
             // 
             // btnExcel
             // 
@@ -125,24 +145,6 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(784, 511);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // txtDayFlag
-            // 
-            this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.txtDayFlag.Location = new System.Drawing.Point(479, 22);
-            this.txtDayFlag.MaxLength = 1;
-            this.txtDayFlag.Name = "txtDayFlag";
-            this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
-            this.txtDayFlag.TabIndex = 35;
-            // 
-            // lblDayFlag
-            // 
-            this.lblDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDayFlag.Location = new System.Drawing.Point(408, 25);
-            this.lblDayFlag.Name = "lblDayFlag";
-            this.lblDayFlag.Size = new System.Drawing.Size(65, 15);
-            this.lblDayFlag.TabIndex = 34;
-            this.lblDayFlag.Text = "Day Flag：";
             // 
             // QueryForm
             // 
