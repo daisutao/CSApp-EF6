@@ -14,7 +14,7 @@ namespace CSApp
     public sealed class Product
     {
         public int Id { get; set; }
-        [MaxLength(15)]
+        [MaxLength(25)]
         public string Category { get; set; }
         [MaxLength(5)]
         public string PlantCode { get; set; }
@@ -93,9 +93,9 @@ namespace CSApp
         {
             var proudct = new List<Product>
             {
-                new Product { Category = "PRC6875-55L1/2", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6905-70L1/2", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
-                new Product { Category = "PRC6968-56C1/2", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6875-55L1(L)/2(M)", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6905-70L1(L)/2(M)", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC6968-56C1(L)/2(M)", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
             };
             context.Product.AddRange(proudct);
             context.SaveChanges();//可以分次提交，也可以最后一次性提交给数据库

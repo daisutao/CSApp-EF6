@@ -233,6 +233,7 @@ namespace CSApp
             if (_csDoc != null)
             {
                 _csDoc.Printer.SwitchTo(cbbPrinter.Text);
+                //_csDoc.Printer.SuppressBackFeed = true;
                 //_csDoc.Printer.HeadTemperature = 20; //SetParameter(PrinterSettings.HeadTemperature, new int?(20));
             }
         }
