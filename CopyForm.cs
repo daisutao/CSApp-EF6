@@ -28,7 +28,7 @@ namespace CSApp
         {
             if (txtCategory.Text.Trim().Equals(string.Empty))
             {
-                MessageBox.Show(Resources.INPUT_CATEGORY, Resources.INFOR);
+                MessageBox.Show(Resources.INPUT_CATEGORY, Resources.MSG_INFOR);
                 return;
             }
 

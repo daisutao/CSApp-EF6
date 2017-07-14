@@ -170,7 +170,7 @@ namespace CSApp
             if (_csDoc == null) return;
             if (txtDayFlag.Text.Trim().Equals(string.Empty))
             {
-                MessageBox.Show(Resources.INPUT_DAY_FLAG, Resources.INFOR);
+                MessageBox.Show(Resources.INPUT_DAY_FLAG, Resources.MSG_INFOR);
                 return;
             }
 
@@ -184,7 +184,7 @@ namespace CSApp
             {
                 if (!Business.SetPrinted(printed, (int)Math.Pow(34, 4) - 1, page))
                 {
-                    MessageBox.Show(string.Format(Resources.MAX_LIMIT, printed.TotalNum), Resources.ERROR);
+                    MessageBox.Show(string.Format(Resources.MAX_LIMIT, printed.TotalNum), Resources.MSG_ERROR);
                     return;
                 }
                 _csDoc.HorzPrintOffset = int.Parse(txtHPos.Text);
@@ -247,7 +247,7 @@ namespace CSApp
 
                 string label = AppDomain.CurrentDomain.BaseDirectory + product.LabelFile;
                 if (!File.Exists(label))
-                    MessageBox.Show(string.Format(Resources.NO_TEMPLATE, product.LabelFile), Resources.ERROR);
+                    MessageBox.Show(string.Format(Resources.NO_TEMPLATE, product.LabelFile), Resources.MSG_ERROR);
                 else
                     lstLabels.Items.Add(product.LabelFile);
                 
@@ -349,8 +349,8 @@ namespace CSApp
 
         private void tsmDelete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否删除选定的品目？", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
-                DialogResult.Yes)
+            if (MessageBox.Show(Resources.DELETE_PRODUCT, Resources.MSG_QUERY,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Business.Context.Product.Remove((Product) treeView1.SelectedNode.Tag);
                 Business.Context.SaveChanges();

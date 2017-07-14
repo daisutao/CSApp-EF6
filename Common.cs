@@ -217,7 +217,7 @@ namespace CSApp
             {
                 wb.Write(fs);
             }
-            MessageBox.Show(Resources.EXPORT_SUCCESS, Resources.INFOR,
+            MessageBox.Show(Resources.EXPORT_SUCCESS, Resources.MSG_INFOR,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

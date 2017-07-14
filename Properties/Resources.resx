@@ -126,7 +126,7 @@
   <data name="NO_TEMPLATE" xml:space="preserve">
     <value>模板文件{0}不存在</value>
   </data>
-  <data name="ERROR" xml:space="preserve">
+  <data name="MSG_ERROR" xml:space="preserve">
     <value>错误</value>
   </data>
   <data name="DEVICE_NAME" xml:space="preserve">
@@ -141,7 +141,7 @@
   <data name="EXCEL_FORMAT" xml:space="preserve">
     <value>Excel 2007格式|*.xlsx</value>
   </data>
-  <data name="INFOR" xml:space="preserve">
+  <data name="MSG_INFOR" xml:space="preserve">
     <value>提示</value>
   </data>
   <data name="EXPORT_SUCCESS" xml:space="preserve">
@@ -155,5 +155,11 @@
   </data>
   <data name="INPUT_CATEGORY" xml:space="preserve">
     <value>请输入品目码！</value>
+  </data>
+  <data name="DELETE_PRODUCT" xml:space="preserve">
+    <value>是否删除选定的品目？</value>
+  </data>
+  <data name="MSG_QUERY" xml:space="preserve">
+    <value>询问</value>
   </data>
 </root>

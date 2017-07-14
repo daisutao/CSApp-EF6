@@ -70,20 +70,20 @@ namespace CSApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 是否删除选定的品目？ 的本地化字符串。
+        /// </summary>
+        internal static string DELETE_PRODUCT {
+            get {
+                return ResourceManager.GetString("DELETE_PRODUCT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  -- {0}号机 的本地化字符串。
         /// </summary>
         internal static string DEVICE_NAME {
             get {
                 return ResourceManager.GetString("DEVICE_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 错误 的本地化字符串。
-        /// </summary>
-        internal static string ERROR {
-            get {
-                return ResourceManager.GetString("ERROR", resourceCulture);
             }
         }
         
@@ -102,15 +102,6 @@ namespace CSApp.Properties {
         internal static string EXPORT_SUCCESS {
             get {
                 return ResourceManager.GetString("EXPORT_SUCCESS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 提示 的本地化字符串。
-        /// </summary>
-        internal static string INFOR {
-            get {
-                return ResourceManager.GetString("INFOR", resourceCulture);
             }
         }
         
@@ -138,6 +129,33 @@ namespace CSApp.Properties {
         internal static string MAX_LIMIT {
             get {
                 return ResourceManager.GetString("MAX_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误 的本地化字符串。
+        /// </summary>
+        internal static string MSG_ERROR {
+            get {
+                return ResourceManager.GetString("MSG_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提示 的本地化字符串。
+        /// </summary>
+        internal static string MSG_INFOR {
+            get {
+                return ResourceManager.GetString("MSG_INFOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 询问 的本地化字符串。
+        /// </summary>
+        internal static string MSG_QUERY {
+            get {
+                return ResourceManager.GetString("MSG_QUERY", resourceCulture);
             }
         }
         

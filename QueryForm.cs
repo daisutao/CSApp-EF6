@@ -22,19 +22,19 @@ namespace CSApp
         {
             if (cbbCategory.Text.Equals(string.Empty))
             {
-                MessageBox.Show(Resources.SELECT_PRODUCT, Resources.INFOR);
+                MessageBox.Show(Resources.SELECT_PRODUCT, Resources.MSG_INFOR);
                 return;
             }
             if (txtDayFlag.Text.Equals(string.Empty))
             {
-                MessageBox.Show(Resources.INPUT_DAY_FLAG, Resources.INFOR);
+                MessageBox.Show(Resources.INPUT_DAY_FLAG, Resources.MSG_INFOR);
                 return;
             }
             string dateFlag = Common.GetWeekFlag(dtpPrintDate.Value) + txtDayFlag.Text.ToUpper();
             List<Barcode> barcodes = Business.GetBarcodeList(cbbCategory.Text, dateFlag);
             if (barcodes == null)
             {
-                MessageBox.Show(Resources.QUERY_NULL, Resources.ERROR);
+                MessageBox.Show(Resources.QUERY_NULL, Resources.MSG_ERROR);
                 return;
             }
             
@@ -52,7 +52,7 @@ namespace CSApp
         {
             if (dataGridView1.RowCount == 0)
             {
-                MessageBox.Show(Resources.QUERY_NONE_NULL, Resources.INFOR);
+                MessageBox.Show(Resources.QUERY_NONE_NULL, Resources.MSG_INFOR);
                 return;
             }
             Common.GridToExcel(cbbCategory.Text, dataGridView1);
