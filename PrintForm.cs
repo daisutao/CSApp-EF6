@@ -338,13 +338,25 @@ namespace CSApp
             UpdateTreeView();
         }
 
-        private void tsmEdit_Click(object sender, EventArgs e)
+        private void tsmModify_Click(object sender, EventArgs e)
         {
             CopyForm form = new CopyForm((Product)treeView1.SelectedNode.Tag, false);
             form.ShowDialog();
             form.Close();
 
             UpdateTreeView();
+        }
+
+        private void tsmDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否删除选定的品目？", "询问", MessageBoxButtons.YesNo, MessageBoxIcon.Question) ==
+                DialogResult.Yes)
+            {
+                Business.Context.Product.Remove((Product) treeView1.SelectedNode.Tag);
+                Business.Context.SaveChanges();
+
+                UpdateTreeView();
+            }
         }
 
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
@@ -359,11 +371,6 @@ namespace CSApp
                     treeView1.SelectedNode = node;//选中这个节点
                 }
             }
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
         }
     }
 }

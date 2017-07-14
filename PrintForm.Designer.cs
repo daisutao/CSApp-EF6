@@ -55,7 +55,8 @@ namespace CSApp
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmModify = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.grpVariables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLabelPreview)).BeginInit();
             this.grpSettings.SuspendLayout();
@@ -239,12 +240,14 @@ namespace CSApp
             // 
             // txtDayFlag
             // 
+            this.txtDayFlag.Enabled = false;
             this.txtDayFlag.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtDayFlag.Location = new System.Drawing.Point(260, 151);
             this.txtDayFlag.MaxLength = 1;
             this.txtDayFlag.Name = "txtDayFlag";
             this.txtDayFlag.Size = new System.Drawing.Size(52, 21);
             this.txtDayFlag.TabIndex = 33;
+            this.txtDayFlag.Text = "2";
             // 
             // lblDayFlag
             // 
@@ -450,24 +453,31 @@ namespace CSApp
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmCopy,
-            this.tsmEdit});
+            this.tsmModify,
+            this.tsmDelete});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 70);
             // 
             // tsmCopy
             // 
             this.tsmCopy.Name = "tsmCopy";
-            this.tsmCopy.Size = new System.Drawing.Size(152, 22);
+            this.tsmCopy.Size = new System.Drawing.Size(100, 22);
             this.tsmCopy.Text = "¸´ÖÆ";
             this.tsmCopy.Click += new System.EventHandler(this.tsmCopy_Click);
             // 
-            // tsmEdit
+            // tsmModify
             // 
-            this.tsmEdit.Name = "tsmEdit";
-            this.tsmEdit.Size = new System.Drawing.Size(152, 22);
-            this.tsmEdit.Text = "ÐÞ¸Ä";
-            this.tsmEdit.Click += new System.EventHandler(this.tsmEdit_Click);
+            this.tsmModify.Name = "tsmModify";
+            this.tsmModify.Size = new System.Drawing.Size(100, 22);
+            this.tsmModify.Text = "ÐÞ¸Ä";
+            this.tsmModify.Click += new System.EventHandler(this.tsmModify_Click);
+            // 
+            // tsmDelete
+            // 
+            this.tsmDelete.Name = "tsmDelete";
+            this.tsmDelete.Size = new System.Drawing.Size(100, 22);
+            this.tsmDelete.Text = "É¾³ý";
+            this.tsmDelete.Click += new System.EventHandler(this.tsmDelete_Click);
             // 
             // PrintForm
             // 
@@ -535,7 +545,8 @@ namespace CSApp
         private System.Windows.Forms.Label lblDayFlag;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmCopy;
-        private System.Windows.Forms.ToolStripMenuItem tsmEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmModify;
+        private System.Windows.Forms.ToolStripMenuItem tsmDelete;
     }
 }
 
