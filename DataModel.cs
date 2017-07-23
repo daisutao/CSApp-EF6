@@ -26,6 +26,8 @@ namespace CSApp
         public string Configure { get; set; }
         [MaxLength(20)]
         public string LabelFile { get; set; }
+        public int PrintSpeed { get; set; }
+        public int Darkness { get; set; }
         public int HorzOffset { get; set; }
         public int VertOffset { get; set; }
         public int PageLinage { get; set; }
@@ -39,7 +41,6 @@ namespace CSApp
         public string DateFlag { get; set; }
         [ConcurrencyCheck]
         public int TotalNum { get; set; }
-
         public int ProductId { get; set; }
         public Product Product { get; set; }
         public ICollection<Barcode> Barcodes { get; set; }
@@ -96,6 +97,7 @@ namespace CSApp
                 new Product { Category = "PRC6875-55L1(L)/2(M)", PlantCode = "C47", Engineer = "J5XP", Revision = "7", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
                 new Product { Category = "PRC6905-70L1(L)/2(M)", PlantCode = "C47", Engineer = "J5XQ", Revision = "6", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
                 new Product { Category = "PRC6968-56C1(L)/2(M)", PlantCode = "C47", Engineer = "J5XR", Revision = "5", Configure = "+?", LabelFile = "PRC6905-70L.lab", PageLinage = 2, },
+                new Product { Category = "PRC3917-66NC", PlantCode = "T", LabelFile = "PRC3917.nlbl", PrintSpeed = 5, Darkness = 20, PageLinage = 4, },
             };
             context.Product.AddRange(proudct);
             context.SaveChanges();//可以分次提交，也可以最后一次性提交给数据库

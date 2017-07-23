@@ -53,12 +53,12 @@ namespace CSApp
         /// <summary>
         ///     34进制转10进制
         /// </summary>
-        /// <param name="strBase34"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
-        private static int ConvertBase34ToBase10(string strBase34)
+        private static int ConvertBase34ToBase10(string str)
         {
             int result;
-            char[] ch = strBase34.ToUpper().ToCharArray();
+            char[] ch = str.ToUpper().ToCharArray();
             switch (ch[0])
             {
                 case 'A': result = 10; break;
@@ -85,7 +85,7 @@ namespace CSApp
                 case 'X': result = 31; break;
                 case 'Y': result = 32; break;
                 case 'Z': result = 33; break;
-                default: result = Convert.ToInt32(strBase34); break;
+                default: result = Convert.ToInt32(str); break;
             }
             return result;
         }
